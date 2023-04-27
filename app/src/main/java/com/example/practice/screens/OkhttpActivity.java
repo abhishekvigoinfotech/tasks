@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.practice.R;
@@ -34,6 +36,7 @@ public class OkhttpActivity extends AppCompatActivity {
 
     //    String url = "https://reqres.in/api/users?page=1";
     String url = "https://jsonplaceholder.typicode.com/posts";
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,13 @@ public class OkhttpActivity extends AppCompatActivity {
 
         settingUpIds();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        progressDialog = new ProgressDialog(OkhttpActivity.this);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.progress_dialog_layout);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        progressDialog.setCanceledOnTouchOutside(false);
         fetchingDataFromOkhttp();
+
 
     }
 
@@ -62,6 +71,7 @@ public class OkhttpActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.isSuccessful()){
+                    progressDialog.dismiss();
                     String res = response.body().string();
                     OkhttpActivity.this.runOnUiThread(() -> {
                         try {
