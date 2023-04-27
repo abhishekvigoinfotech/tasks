@@ -15,12 +15,10 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.text.SimpleDateFormat;
-
 public class MainActivity extends AppCompatActivity {
 
     TextInputEditText aadhaarNoTextInputEditText;
-    MaterialButton fetchDetailsButton, NextActivity, okhttp, carApiBtn, sqliteBtn, recordsBtn;
+    MaterialButton fetchDetailsButton, NextActivity, okhttp, weatherApiBtn, sqliteBtn, recordsBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         fetchDetailsButton.setOnClickListener(v -> displayNumber());
         NextActivity.setOnClickListener(v -> intent());
         okhttp.setOnClickListener(v -> intent2());
-        carApiBtn.setOnClickListener(v -> intent3());
+        weatherApiBtn.setOnClickListener(v -> intent3());
         sqliteBtn.setOnClickListener(v -> intent4());
         recordsBtn.setOnClickListener(v -> intent5());
 
@@ -65,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         fetchDetailsButton = findViewById(R.id.fetch_details_button);
         NextActivity = findViewById(R.id.next_activity_button);
         okhttp = findViewById(R.id.okhttp_activity_button);
-        carApiBtn = findViewById(R.id.weatherinfo_activity_button);
+        weatherApiBtn = findViewById(R.id.weatherinfo_activity_button);
         sqliteBtn = findViewById(R.id.sqlite_activity_button);
         recordsBtn = findViewById(R.id.records_activity_button);
     }

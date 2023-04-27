@@ -20,7 +20,6 @@ public class LogRecords extends AppCompatActivity {
     MyDbHandler dbHandler = new MyDbHandler(LogRecords.this);
     List<SQLiteModel> dataList;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

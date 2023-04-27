@@ -43,15 +43,16 @@
                 android:layout_gravity="center"
                 android:text="Enter Aadhaar Number"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 tools:ignore="HardcodedText" />
 
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:id="@+id/aadhaar_text_input"
-                android:hint="Enter Number"
+                android:hint="XXXX-XXXX-XXXX"
+                android:layout_margin="10dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 tools:ignore="HardcodedText" />
@@ -63,41 +64,52 @@
                 android:text="Fetch Details"
                 android:id="@+id/fetch_details_button"
                 tools:ignore="HardcodedText" />
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="wrap_content"
+
+            <GridLayout
+                android:id="@+id/GridLayout1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Recycler View"
-                android:id="@+id/next_activity_button"
-                tools:ignore="HardcodedText" />
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Ok Http"
-                android:id="@+id/okhttp_activity_button"
-                tools:ignore="HardcodedText" />
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Weather Api"
-                android:id="@+id/weatherinfo_activity_button"
-                tools:ignore="HardcodedText" />
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="SQLite"
-                android:id="@+id/sqlite_activity_button"
-                tools:ignore="HardcodedText" />
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="View Records"
-                android:id="@+id/records_activity_button"
-                tools:ignore="HardcodedText" />
+                android:columnCount="2"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Recycler View"
+                    android:id="@+id/next_activity_button"
+                    tools:ignore="HardcodedText" />
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Ok Http"
+                    android:id="@+id/okhttp_activity_button"
+                    tools:ignore="HardcodedText" />
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Weather Api"
+                    android:id="@+id/weatherinfo_activity_button"
+                    tools:ignore="HardcodedText" />
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="SQLite"
+                    android:id="@+id/sqlite_activity_button"
+                    tools:ignore="HardcodedText" />
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="View Records"
+                    android:id="@+id/records_activity_button"
+                    tools:ignore="HardcodedText" />
+
+            </GridLayout>
+
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
