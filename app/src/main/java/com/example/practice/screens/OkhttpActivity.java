@@ -1,12 +1,16 @@
 package com.example.practice.screens;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -50,9 +54,31 @@ public class OkhttpActivity extends AppCompatActivity {
         progressDialog.setContentView(R.layout.progress_dialog_layout);
         progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         progressDialog.setCanceledOnTouchOutside(false);
-        fetchingDataFromOkhttp();
+        initialTasks();
+    }
 
-
+    private void initialTasks() {
+        if (isOnline()) {
+            fetchingDataFromOkhttp();
+        } else {
+            try {
+                progressDialog.dismiss();
+                AlertDialog.Builder builder =new AlertDialog.Builder(this);
+                builder.setTitle("No internet Connection");
+                builder.setMessage("Please turn on internet connection to continue");
+                builder.setNegativeButton("close", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        OkhttpActivity.this.finish();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            } catch (Exception e) {
+                Log.d("noInternetDialog", "Show Dialog: " + e.getMessage());
+            }
+        }
     }
 
     private void fetchingDataFromOkhttp() {
@@ -64,6 +90,12 @@ public class OkhttpActivity extends AppCompatActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                OkhttpActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(OkhttpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
                 e.printStackTrace();
             }
 
@@ -71,10 +103,12 @@ public class OkhttpActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.isSuccessful()){
+//                    Log.d("onResponse", "onResponse: "+response.code());
                     progressDialog.dismiss();
                     String res = response.body().string();
                     OkhttpActivity.this.runOnUiThread(() -> {
                         try {
+                            Toast.makeText(OkhttpActivity.this, String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
                             JSONArray arr = new JSONArray(res);
                             for (int i = 0; i< arr.length(); i++){
                                 JSONObject object = arr.getJSONObject(i);
@@ -92,6 +126,16 @@ public class OkhttpActivity extends AppCompatActivity {
         });
     }
 
+    public boolean isOnline() {
+        ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(OkhttpActivity.this.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+
+        if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+            Toast.makeText(OkhttpActivity.this, "No Internet connection!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
     private void settingUpIds() {
         recyclerView = findViewById(R.id.okhttp_recycler_view);
     }
