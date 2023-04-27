@@ -84,6 +84,20 @@
                 android:text="Weather Api"
                 android:id="@+id/weatherinfo_activity_button"
                 tools:ignore="HardcodedText" />
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="SQLite"
+                android:id="@+id/sqlite_activity_button"
+                tools:ignore="HardcodedText" />
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="View Records"
+                android:id="@+id/records_activity_button"
+                tools:ignore="HardcodedText" />
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
